@@ -2,13 +2,9 @@
 import { ADD_EMAIL } from '../actions';
 
 const INITIAL_STATE = {
-  user: {
-    email: '',
-  },
-  wallet: {
-    currencies: [],
-    expenses: [],
-  },
+
+  email: '',
+
 };
 const userReducer = (state = INITIAL_STATE, action) => {
   console.log(action);
@@ -16,9 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
   case ADD_EMAIL:
     return {
       ...state,
-
       email: action.payload,
-
     };
   default:
     return state;
