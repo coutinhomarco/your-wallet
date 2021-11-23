@@ -1,37 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addExpense } from '../actions';
+import PropTypes from 'prop-types';
+import { addFormValue, addExpense, receiveCurrencies } from '../actions';
 import Loading from './Loading';
 import CurrenciesSelect from './CurrenciesSelect';
+import Methods from './Methods';
 
 class Form extends React.Component {
   constructor() {
     super();
     this.state = {
       isFetching: false,
+      formState: {
+        value: 0,
+        description: '',
+      },
     };
     this.onInputChange = this.onInputChange.bind(this);
+    this.joinStates = this.joinStates.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
+    const { dispatch } = this.props;
+    dispatch(addExpense());
   }
 
   onInputChange({ target }) {
+    const { dispatch } = this.props;
     const { name, value } = target;
-    console.log(this.state);
-    this.setState({
+    const { formState: oldFormState } = this.state;
+    this.setState({ formState: {
+      ...oldFormState,
       [name]: value,
-    });
+    } }, () => dispatch(addFormValue(this.state)));
   }
 
-  fetchAPIThunk() {
-    return ((dispatch) => (fetch('https://economia.awesomeapi.com.br/json/all')
-      .then((result) => result.json()).then((json) => dispatch(addExpense(json)))));
+  joinStates() {
+    const { wallet, form, dispatch } = this.props;
+    const newExpenses = {
+      ...form,
+      exchangeRates: wallet.currencies,
+    };
+    const newState = {
+      currencies: wallet.currencies,
+      expenses: [...wallet.expenses,
+        {
+          ...newExpenses,
+        }],
+    };
+    newState.expenses
+      .forEach((expense, index) => { expense.id = index; });
+    dispatch(receiveCurrencies(newState));
+    dispatch(addFormValue({ formState: {
+      value: 0,
+      description: '',
+      method: 'dinheiro',
+      currency: 'USD',
+      tag: 'alimentacao',
+    } }));
   }
 
   render() {
-    const { isFetching } = this.state;
+    const { isFetching, formState } = this.state;
+    const { value } = formState;
+    const { form } = this.props;
     return (
       <div>
         {
@@ -40,6 +72,7 @@ class Form extends React.Component {
               <label htmlFor="valor">
                 Valor
                 <input
+                  value={ form.value }
                   name="value"
                   onChange={ this.onInputChange }
                   id="valor"
@@ -50,6 +83,7 @@ class Form extends React.Component {
               <label htmlFor="descrip">
                 Descrição
                 <input
+                  value={ form.description }
                   name="description"
                   onChange={ this.onInputChange }
                   id="descrip"
@@ -57,21 +91,9 @@ class Form extends React.Component {
                   data-testid="description-input"
                 />
               </label>
-              <label htmlFor="method">
-                Método
-                <select
-                  name="method"
-                  onChange={ this.onInputChange }
-                  id="method"
-                  data-testid="method-input"
-                >
-                  <option value="dinheiro">Dinheiro</option>
-                  <option value="credito">Cartão de crédito</option>
-                  <option value="debito">Cartão de débito</option>
-                </select>
-              </label>
+              <Methods />
               <CurrenciesSelect />
-              <button type="button">Adicionar despesa</button>
+              <button onClick={ this.joinStates } type="button">Adicionar despesa</button>
             </form>)
         }
       </div>);
@@ -79,8 +101,9 @@ class Form extends React.Component {
 }
 const mapStateToProps = (state) => ({
   ...state,
-  wallet: {
-    enchangeRates: state.wallet.payload,
-  },
+  ...state.wallet.payload,
 });
+Form.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 export default connect(mapStateToProps)(Form);
