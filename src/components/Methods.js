@@ -21,8 +21,7 @@ class Methods extends React.Component {
 
   onInputChange({ target }) {
     const { dispatch } = this.props;
-    const { name, value } = target;
-    const { formState: oldFormState } = this.state;
+    const { value } = target;
     this.setState({ formState: {
       method: value,
     } }, () => dispatch(addFormValue(this.state)));
