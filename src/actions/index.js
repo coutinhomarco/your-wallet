@@ -6,12 +6,6 @@ export const addEmail = (payload) => ({
 });
 
 // ACTIONS DA REQUISIÇÃO
-export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
-export const requesteCurrencies = (payload) => ({
-  type: REQUEST_CURRENCIES,
-  payload,
-});
-
 export const RECEIVE_CURRENCIES = 'RECEIVE_CURRENCIES';
 export const receiveCurrencies = (payload) => ({
   type: RECEIVE_CURRENCIES,
@@ -27,16 +21,11 @@ export const addFormValue = (payload) => ({
 
 // JUNTA ESTADO FORM COM REQUISIÇÃO
 
-export const addExpense = () => (dispatch) => {
-  // const state = getState();
-  dispatch(requesteCurrencies());
-  // console.log(algumacoisa);
-  return fetch('https://economia.awesomeapi.com.br/json/all')
-    .then((response) => response.json())
-    .then((currencies) => {
-      const newStateObject = {
-        currencies,
-      };
-      dispatch(receiveCurrencies(newStateObject));
-    });
-};
+export const addExpense = () => (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
+  .then((response) => response.json())
+  .then((currencies) => {
+    const newStateObject = {
+      currencies,
+    };
+    dispatch(receiveCurrencies(newStateObject));
+  });

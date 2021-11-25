@@ -154,7 +154,7 @@ describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as s
       expect(valueInput.value === 0 || valueInput.value === '0' || valueInput.value === '').toBe(true);
     });
     expect(store.getState().wallet.expenses).toStrictEqual(expectedStateExpense);
-
+    
     userEvent.type(valueInput, '20');
     userEvent.selectOptions(currencyInput, 'EUR');
     userEvent.selectOptions(methodInput, 'Cartão de débito');

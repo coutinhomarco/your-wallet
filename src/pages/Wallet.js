@@ -16,14 +16,20 @@ class Wallet extends React.Component {
   sumValue() {
     const { wallet } = this.props;
     const { expenses } = wallet;
-    const expenseArray = expenses.map((expense) => expense.value);
-    return expenseArray.reduce((total, value) => total + Number(value), 0);
+    const expenseArray = expenses.map((expense) => {
+      const { currency } = expense;
+      return ({
+        value: expense.value,
+        multiplier: expense.exchangeRates[currency].ask,
+      });
+    });
+    return expenseArray
+      .reduce((total, obj) => (total + Number(obj.value) * Number(obj.multiplier)), 0);
   }
 
   render() {
-    const { user, wallet } = this.props;
+    const { user } = this.props;
     const { email } = user;
-    const { expenses } = wallet;
     return (
       <div>
         <header>
@@ -42,8 +48,11 @@ class Wallet extends React.Component {
   }
 }
 Wallet.propTypes = {
-  user: PropTypes.objectOf({
-    email: PropTypes.object.isRequired,
+  user: PropTypes.objectOf().isRequired,
+  wallet: PropTypes.shape({
+    expenses: PropTypes.shape({
+      map: PropTypes.func,
+    }),
   }).isRequired,
 };
 const mapStateToProps = (state) => ({

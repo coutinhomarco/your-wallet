@@ -22,6 +22,7 @@ class Form extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(addFormValue(this.state));
     dispatch(addExpense());
   }
 
@@ -51,13 +52,12 @@ class Form extends React.Component {
     newState.expenses
       .forEach((expense, index) => { expense.id = index; });
     dispatch(receiveCurrencies(newState));
-    dispatch(addFormValue({ formState: {
-      value: 0,
-      description: '',
-      method: 'dinheiro',
-      currency: 'USD',
-      tag: 'alimentacao',
-    } }));
+    dispatch(addExpense());
+    this.setState({
+      formState: {
+        value: '',
+      },
+    });
   }
 
   render() {
@@ -72,7 +72,7 @@ class Form extends React.Component {
               <label htmlFor="valor">
                 Valor
                 <input
-                  value={ form.value }
+                  value={ value }
                   name="value"
                   onChange={ this.onInputChange }
                   id="valor"
@@ -83,7 +83,6 @@ class Form extends React.Component {
               <label htmlFor="descrip">
                 Descrição
                 <input
-                  value={ form.description }
                   name="description"
                   onChange={ this.onInputChange }
                   id="descrip"
@@ -93,7 +92,7 @@ class Form extends React.Component {
               </label>
               <Methods />
               <CurrenciesSelect />
-              <button onClick={ this.joinStates } type="button">Adicionar despesa</button>
+              <button onClick={ this.joinStates } type="reset">Adicionar despesa</button>
             </form>)
         }
       </div>);
@@ -105,5 +104,12 @@ const mapStateToProps = (state) => ({
 });
 Form.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    value: PropTypes.string,
+  }).isRequired,
+  wallet: PropTypes.shape({
+    currencies: PropTypes.string,
+    expenses: PropTypes.string,
+  }).isRequired,
 };
 export default connect(mapStateToProps)(Form);

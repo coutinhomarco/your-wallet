@@ -9,11 +9,16 @@ class CurrenciesSelect extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.state = {
       json: [],
+      formState: {
+        currency: 'USD',
+        tag: 'Alimentação',
+      },
     };
   }
 
   componentDidMount() {
-    this.fetchAPI();
+    const { dispatch } = this.props;
+    dispatch(addFormValue(this.state));
   }
 
   onInputChange({ target }) {
@@ -26,16 +31,8 @@ class CurrenciesSelect extends React.Component {
     } }, () => dispatch(addFormValue(this.state)));
   }
 
-  fetchAPI() {
-    return fetch('https://economia.awesomeapi.com.br/json/all')
-      .then((result) => result.json()).then((json) => this.setState({
-        json,
-      }));
-  }
-
   render() {
-    const { json } = this.state;
-    const { form } = this.props;
+    const { json } = this.props;
     return (
       <>
         <label htmlFor="currency">
@@ -63,19 +60,26 @@ class CurrenciesSelect extends React.Component {
             id="tag-input"
             data-testid="tag-input"
           >
-            <option value="alimentacao">Alimentação</option>
+            <option value="Alimentação">Alimentação</option>
             {/* SELECTED */}
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
       </>
     );
   }
 }
-export default connect()(CurrenciesSelect);
+
+const mapStateToProps = (state) => ({
+  ...state,
+  json: state.wallet.currencies,
+});
+
+export default connect(mapStateToProps)(CurrenciesSelect);
 CurrenciesSelect.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  json: PropTypes.arrayOf({}).isRequired,
 };

@@ -3,10 +3,6 @@ import { ADD_FORM_VALUE } from '../actions';
 
 export const INITIAL_STATE = {
   value: 0,
-  description: '',
-  currency: 'USD',
-  method: 'dinheiro',
-  tag: 'alimentacao',
 };
 
 const formReducer = (state = INITIAL_STATE, action) => {

@@ -8,18 +8,23 @@ class Methods extends React.Component {
     super();
     this.state = ({
       formState: {
-        method: 'dinheiro',
+        method: 'Dinheiro',
       },
     });
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(addFormValue(this.state));
   }
 
   onInputChange({ target }) {
-    const { dispatch, form } = this.props;
+    const { dispatch } = this.props;
     const { name, value } = target;
     const { formState: oldFormState } = this.state;
     this.setState({ formState: {
-      ...oldFormState,
-      [name]: value,
+      method: value,
     } }, () => dispatch(addFormValue(this.state)));
   }
 
@@ -29,16 +34,16 @@ class Methods extends React.Component {
         Método
         <select
           name="method"
-          onInput={ (event) => {
-            this.onInputChange(event);
-          } }
+          onChange={
+            this.onInputChange
+          }
           id="method"
           data-testid="method-input"
         >
-          <option value="dinheiro">Dinheiro</option>
+          <option value="Dinheiro">Dinheiro</option>
           {/* SELECTED É A PROPRIEDADE */}
-          <option value="credito">Cartão de crédito</option>
-          <option value="debito">Cartão de débito</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
     );
