@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TableHeader from './TableHeader';
+import { TableHeader } from './TableHeader';
 
 class Table extends Component {
   render() {
