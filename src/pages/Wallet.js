@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
-import { Table } from '../components/Table';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   constructor() {
@@ -25,7 +25,8 @@ class Wallet extends React.Component {
       });
     });
     return expenseArray
-      .reduce((total, obj) => (total + Number(obj.value) * Number(obj.multiplier)), 0);
+      .reduce((total, obj) => (total + Number(obj.value)
+        .toFixed(2) * Number(obj.multiplier).toFixed(2)), 0);
   }
 
   render() {
