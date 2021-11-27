@@ -6,16 +6,10 @@ export class Table extends Component {
     return (
       <table>
         <th>
-          Valor
-        </th>
-        <th>
           Valor convertido
         </th>
         <th>
           Descrição
-        </th>
-        <th>
-          Método
         </th>
         <th>
           Moeda
