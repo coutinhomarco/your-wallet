@@ -26,7 +26,7 @@ class Wallet extends React.Component {
     });
     return expenseArray
       .reduce((total, obj) => (total + Number(obj.value)
-        .toFixed(2) * Number(obj.multiplier).toFixed(2)), 0);
+         * Number(obj.multiplier)), 0);
   }
 
   render() {
