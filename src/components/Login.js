@@ -47,6 +47,7 @@ class Login extends React.Component {
     console.log(this.props);
     return (
       <div id="login-container">
+        {/* <img id="wallet-image" alt="wallet" src="https://images.pexels.com/photos/6777563/pexels-photo-6777563.jpeg?cs=srgb&dl=pexels-alesia-kozik-6777563.jpg&fm=jpg" /> */}
         <main className="form-flex">
           <h1>Your Wallet</h1>
           <form>

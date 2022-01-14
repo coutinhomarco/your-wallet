@@ -9,7 +9,6 @@ function App() {
   return (
     <>
       <div className="container">
-        <img id="wallet-image" alt="wallet" src="https://images.pexels.com/photos/6777563/pexels-photo-6777563.jpeg?cs=srgb&dl=pexels-alesia-kozik-6777563.jpg&fm=jpg" />
         <Switch>
           <Route path="/carteira" component={ Wallet } />
           <Route path="/" component={ Login } />

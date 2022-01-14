@@ -61,7 +61,6 @@ class CurrenciesSelect extends React.Component {
             data-testid="tag-input"
           >
             <option value="Alimentação">Alimentação</option>
-            {/* SELECTED */}
             <option value="Lazer">Lazer</option>
             <option value="Trabalho">Trabalho</option>
             <option value="Transporte">Transporte</option>

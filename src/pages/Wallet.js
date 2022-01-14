@@ -33,14 +33,13 @@ class Wallet extends React.Component {
     const { user } = this.props;
     const { email } = user;
     return (
-      <div>
+      <div id="wallet-container">
         <header>
           <h2 data-testid="email-field">{email}</h2>
           <h2 data-testid="total-field">
             {
-              this.sumValue()
+              `Total: ${this.sumValue()} BRL`
             }
-            <span data-testid="header-currency-field">BRL</span>
           </h2>
         </header>
         <Form />

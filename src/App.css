@@ -1,9 +1,12 @@
 body{
+  background-image: url(images/pexels-alesia-kozik-6777563.jpg);
   background-color: #3e4450;
+  background-size: cover;
   font-family: 'Montserrat', sans-serif;
 }
 
 .form-flex {
+  justify-self: center;
   align-items: center;
   /* justify-content: center; */
   display: flex;
@@ -29,6 +32,7 @@ body{
   box-shadow: 5px 2.5px 2.5px rgb(39, 38, 38);
   display: flex;
   flex-direction: column;
+  opacity: 0.9;
   padding: 20px;
   line-height:2rem;
 }
@@ -39,15 +43,24 @@ body{
 }
 
 .container{
+  height:700px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 #login-container{
-  width: 800px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
-#wallet-image{
-  max-width: 522px;
+#wallet-container{
+  background-color:aliceblue;
+  justify-self: center;
 }
+/* #wallet-image{
+  max-width: 522px;
+} */
