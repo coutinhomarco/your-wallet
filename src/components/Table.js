@@ -14,25 +14,29 @@ class Table extends Component {
             expenses.map((expense) => {
               const { currency } = expense;
               let currencyC = currency;
+              let exchangeRate = expense.exchangeRates[currency].ask;
               if (expense.currency === 'USD') {
                 currencyC = 'Dólar Comercial';
               }
               if (expense.currency === 'EUR') {
                 currencyC = 'Euro';
               }
+              if (expense.currency === 'BTC') {
+                exchangeRate = exchangeRate.split('')
+                  .filter((carac) => carac !== '.').join('');
+              }
               return (
                 <tr key>
                   <td>{expense.value}</td>
                   <td>
-                    {Number(expense.exchangeRates[currency]
-                      .ask * expense.value)}
+                    {Number(exchangeRate * expense.value).toFixed(2)}
                   </td>
                   <td>{expense.description}</td>
                   <td>{currencyC}</td>
                   <td>Real</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
-                  <td>{Number(expense.exchangeRates[currency].ask)}</td>
+                  <td>{Number(exchangeRate).toFixed(2)}</td>
                 </tr>);
             })
           )

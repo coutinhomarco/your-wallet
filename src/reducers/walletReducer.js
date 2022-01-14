@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { RECEIVE_CURRENCIES } from '../actions';
+import { RECEIVE_CURRENCIES, ADD_FUNCTION } from '../actions';
 
 const INITIAL_STATE = {
 
@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 const walletReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case RECEIVE_CURRENCIES:
+  case RECEIVE_CURRENCIES || ADD_FUNCTION:
     return {
       ...state,
       ...action.payload,

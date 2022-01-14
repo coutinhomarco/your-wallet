@@ -80,8 +80,14 @@ label{
 }
 
 table{
+  /* border: 1px solid black; */
   text-align: center;
   width: 100%;
+}
+
+th, td{
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 /* #wallet-image{
   max-width: 522px;

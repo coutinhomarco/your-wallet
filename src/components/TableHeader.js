@@ -28,9 +28,6 @@ export class TableHeader extends Component {
         <th>
           Câmbio utilizado
         </th>
-        <th>
-          Editar/Excluir
-        </th>
       </>
     );
   }

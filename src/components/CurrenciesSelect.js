@@ -6,7 +6,6 @@ import { addFormValue } from '../actions';
 class CurrenciesSelect extends React.Component {
   constructor() {
     super();
-    this.onInputChange = this.onInputChange.bind(this);
     this.state = {
       json: [],
       formState: {
@@ -21,24 +20,14 @@ class CurrenciesSelect extends React.Component {
     dispatch(addFormValue(this.state));
   }
 
-  onInputChange({ target }) {
-    const { dispatch } = this.props;
-    const { name, value } = target;
-    const { formState: oldFormState } = this.state;
-    this.setState({ formState: {
-      ...oldFormState,
-      [name]: value,
-    } }, () => dispatch(addFormValue(this.state)));
-  }
-
   render() {
-    const { json } = this.props;
+    const { json, onChange } = this.props;
     return (
       <>
         <label htmlFor="currency">
           Moeda
           <select
-            onChange={ this.onInputChange }
+            onChange={ onChange }
             name="currency"
             id="currency"
             data-testid="currency-input"
@@ -55,7 +44,7 @@ class CurrenciesSelect extends React.Component {
         <label htmlFor="tag-input">
           Categoria
           <select
-            onChange={ this.onInputChange }
+            onChange={ onChange }
             name="tag"
             id="tag-input"
             data-testid="tag-input"
@@ -80,5 +69,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(CurrenciesSelect);
 CurrenciesSelect.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  json: PropTypes.arrayOf({}).isRequired,
+  json: PropTypes.arrayOf().isRequired,
+  onChange: PropTypes.func.isRequired,
 };

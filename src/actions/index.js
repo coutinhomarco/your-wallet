@@ -29,3 +29,10 @@ export const addExpense = () => (dispatch) => fetch('https://economia.awesomeapi
     };
     dispatch(receiveCurrencies(newStateObject));
   });
+
+// ADICIONA FUNÇÃO
+export const ADD_FUNCTION = 'ADD_FUNCTION';
+export const addFunction = (payload) => ({
+  type: ADD_FUNCTION,
+  payload,
+});

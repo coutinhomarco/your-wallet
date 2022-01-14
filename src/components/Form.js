@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addFormValue, addExpense, receiveCurrencies } from '../actions';
+import { addFormValue, addExpense, receiveCurrencies, addFunction } from '../actions';
 import Loading from './Loading';
 import CurrenciesSelect from './CurrenciesSelect';
 import Methods from './Methods';
@@ -24,6 +24,7 @@ class Form extends React.Component {
     const { dispatch } = this.props;
     dispatch(addFormValue(this.state));
     dispatch(addExpense());
+    dispatch(addFunction(this.onInputChange));
   }
 
   onInputChange({ target }) {
@@ -38,7 +39,7 @@ class Form extends React.Component {
 
   joinStates() {
     const { wallet, form, dispatch } = this.props;
-    console.log(this.props);
+    console.log(this.state);
     const newExpenses = {
       ...form,
       exchangeRates: wallet.currencies,
@@ -53,13 +54,18 @@ class Form extends React.Component {
     newState.expenses
       .forEach((expense, index) => { expense.id = index; });
     dispatch(receiveCurrencies(newState));
-    dispatch(addExpense());
     this.setState({
       formState: {
         value: 0,
       },
     });
-    dispatch(addFormValue(this.state));
+    dispatch(addFormValue({ formState: {
+      value: 0,
+      description: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      currency: 'USD',
+    } }));
   }
 
   render() {
@@ -93,7 +99,7 @@ class Form extends React.Component {
                 />
               </label>
               <Methods />
-              <CurrenciesSelect />
+              <CurrenciesSelect onChange={ this.onInputChange } />
               <button onClick={ this.joinStates } type="reset">Adicionar despesa</button>
             </form>)
         }

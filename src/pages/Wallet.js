@@ -19,14 +19,21 @@ class Wallet extends React.Component {
     const { expenses } = wallet;
     const expenseArray = expenses.map((expense) => {
       const { currency } = expense;
+      const { value } = expense;
+      let expenseRate = expense.exchangeRates[currency].ask;
+      if (expense.currency === 'BTC') {
+        expenseRate = expenseRate.split('')
+          .filter((carac) => carac !== '.').join('');
+      }
+      console.log(expense);
       return ({
-        value: expense.value,
-        multiplier: expense.exchangeRates[currency].ask,
+        value,
+        multiplier: expenseRate,
       });
     });
     return expenseArray
       .reduce((total, obj) => (total + Number(obj.value)
-         * Number(obj.multiplier)), 0);
+         * Number(obj.multiplier)), 0).toFixed(2);
   }
 
   render() {
