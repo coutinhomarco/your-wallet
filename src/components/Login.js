@@ -46,38 +46,40 @@ class Login extends React.Component {
     const { email, isDisabled } = this.state;
     console.log(this.props);
     return (
-      <div>
-        <form className="form-flex">
+      <div id="login-container">
+        <main className="form-flex">
+          <h1>Your Wallet</h1>
+          <form>
+            <input
+              data-testid="email-input"
+              name="email"
+              onChange={ this.onInputChange }
+              placeholder="Email"
+              id="email"
+            />
 
-          <input
-            data-testid="email-input"
-            name="email"
-            onChange={ this.onInputChange }
-            placeholder="Email"
-            id="email"
-          />
+            <input
+              data-testid="password-input"
+              name="senha"
+              onChange={ this.onInputChange }
+              placeholder="Senha"
+              id="senha"
+            />
+            <Link to="/carteira">
+              <button
+                disabled={ isDisabled }
+                onClick={ () => {
+                  dispatch(addEmail(email));
+                } }
+                type="button"
+              >
+                Entrar
 
-          <input
-            data-testid="password-input"
-            name="senha"
-            onChange={ this.onInputChange }
-            placeholder="Senha"
-            id="senha"
-          />
-          <Link to="/carteira">
-            <button
-              disabled={ isDisabled }
-              onClick={ () => {
-                dispatch(addEmail(email));
-              } }
-              type="button"
-            >
-              Entrar
+              </button>
 
-            </button>
-
-          </Link>
-        </form>
+            </Link>
+          </form>
+        </main>
       </div>
     );
   }

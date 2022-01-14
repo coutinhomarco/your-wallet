@@ -35,7 +35,6 @@ class Wallet extends React.Component {
     return (
       <div>
         <header>
-          <img alt="teste" />
           <h2 data-testid="email-field">{email}</h2>
           <h2 data-testid="total-field">
             {
