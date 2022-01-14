@@ -38,6 +38,7 @@ class Form extends React.Component {
 
   joinStates() {
     const { wallet, form, dispatch } = this.props;
+    console.log(this.props);
     const newExpenses = {
       ...form,
       exchangeRates: wallet.currencies,
@@ -55,9 +56,10 @@ class Form extends React.Component {
     dispatch(addExpense());
     this.setState({
       formState: {
-        value: '',
+        value: 0,
       },
     });
+    dispatch(addFormValue(this.state));
   }
 
   render() {

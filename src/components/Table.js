@@ -25,14 +25,14 @@ class Table extends Component {
                   <td>{expense.value}</td>
                   <td>
                     {Number(expense.exchangeRates[currency]
-                      .ask * expense.value).toFixed(2)}
+                      .ask * expense.value)}
                   </td>
                   <td>{expense.description}</td>
                   <td>{currencyC}</td>
                   <td>Real</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
-                  <td>{Number(expense.exchangeRates[currency].ask).toFixed(2)}</td>
+                  <td>{Number(expense.exchangeRates[currency].ask)}</td>
                 </tr>);
             })
           )

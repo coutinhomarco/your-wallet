@@ -58,8 +58,30 @@ body{
 }
 
 #wallet-container{
-  background-color:aliceblue;
+  background-color:rgb(161, 165, 168);
+  color: rgb(21, 22, 22);
+  opacity:0.9;
+  font-size:17px;
+  font-weight: bold;
+  padding: 30px;
   justify-self: center;
+}
+
+label{
+  margin-right: 10px;
+}
+
+#wallet-container input, select{
+  margin-left: 5px;
+}
+
+#wallet-container form{
+  margin-bottom: 15px;
+}
+
+table{
+  text-align: center;
+  width: 100%;
 }
 /* #wallet-image{
   max-width: 522px;
