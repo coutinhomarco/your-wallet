@@ -13,7 +13,7 @@ Trata-se de uma aplicação feita pensando no controle de gastos em inúmeras mo
   <li>Utiliza uma API, que obtem a cotação da moeda no momento da despesa</li>
 </ul>
 <hr>
-<h4>Confira remotamente:</h4> <a href="https://recipes-app-neon.vercel.app/" targe='_blank'>Clique aqui</a>
+<h4>Confira remotamente:</h4> <a href="https://your-wallet-ruddy.vercel.app/" targe='_blank'>Clique aqui</a>
 <br>
 Digite um email válido (Exemplo: teste@teste.com)
 e uma senha com mais de 6 caracteres
